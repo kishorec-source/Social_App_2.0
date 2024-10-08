@@ -19,6 +19,21 @@ const AppNavigator = () => {
           options={{headerShown: false}}
         /> */}
         <Stack.Screen
+          name="Reunion"
+          component={Reunion}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Buddy"
+          component={Buddy}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Yearbook"
+          component={Yearbook}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="Profile"
           component={Profile}
           options={{headerShown: false}}

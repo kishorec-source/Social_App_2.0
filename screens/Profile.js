@@ -42,6 +42,10 @@ const Profile = ({user}) => {
             style={{borderWidth: 1, marginBottom: 10}}
           />
           <Button title="Save" onPress={handleSave} />
+          <Image
+            source={{uri: 'https://via.placeholder.com/150'}}
+            style={{width: 150, height: 150, marginTop: 10}}
+          />
         </>
       ) : (
         <>
@@ -49,11 +53,16 @@ const Profile = ({user}) => {
           <Text>Bio: {bio}</Text>
           <Text>Profile Picture URL: {profilePic}</Text>
           <Button title="Edit" onPress={() => setIsEditing(true)} />
+          <Image
+            source={{uri: 'https://via.placeholder.com/150'}}
+            style={{width: 150, height: 150, marginTop: 10}}
+          />
         </>
       )}
     </View>
   );
 };
+
 Profile.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string,

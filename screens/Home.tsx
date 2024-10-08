@@ -22,6 +22,26 @@ export default function Index() {
           <Text style={styles.postButtonText}>Post</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.card}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Create a new topic"
+          placeholderTextColor="#888"
+          multiline />
+        <TouchableOpacity style={styles.postButton}>
+          <Text style={styles.postButtonText}>Create Topic</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.card}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Join a discussion"
+          placeholderTextColor="#888"
+          multiline />
+        <TouchableOpacity style={styles.postButton}>
+          <Text style={styles.postButtonText}>Join Discussion</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* Ad Card */}
       <View style={styles.card}>
