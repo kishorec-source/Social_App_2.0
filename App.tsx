@@ -2,7 +2,7 @@ import AppNavigator from './AppNavigator';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Home from './screens/Home';
-import Signin from './components/Signin';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
   return (

@@ -1,49 +1,146 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {setUser} from '../slices/userSlice';
 import {View, TextInput, Button, Text} from 'react-native';
 
-const SignUpSignIn = () => {
+const Signup = () => {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [username, setUsername] = useState('');
+  const [city, setCity] = useState('');
+  const [graduationYear, setGraduationYear] = useState('');
   const [email, setEmail] = useState('');
+  const [stream, setStream] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
 
   const handleSignIn = () => {
     // Handle sign-in logic here
-    dispatch(setUser({email}));
-  };
-
-  const handleGoogleSignIn = () => {
-    // Handle Google sign-in logic here
-    dispatch(setUser({email: 'googleuser@example.com'}));
-  };
-
-  const handleFacebookSignIn = () => {
-    // Handle Facebook sign-in logic here
-    dispatch(setUser({email: 'facebookuser@example.com'}));
-  };
-
-  const handleMicrosoftSignIn = () => {
-    // Handle Microsoft sign-in logic here
-    dispatch(setUser({email: 'microsoftuser@example.com'}));
+    console.log('Sign in with:', email);
   };
 
   return (
-    <View>
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
+    <View style={{margin: 20}}>
+      <Text
+        style={{
+          marginTop: 20,
+          alignSelf: 'center',
+          color: 'blue',
+          fontSize: 20,
+        }}>
+        Sign Up Here
+      </Text>
       <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="First Name"
+        value={firstname}
+        onChangeText={setFirstname}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Last Name"
+        value={lastname}
+        onChangeText={setLastname}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="City"
+        value={city}
+        onChangeText={setCity}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Graduation Year"
+        value={graduationYear}
+        onChangeText={setGraduationYear}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Stream"
+        value={stream}
+        onChangeText={setStream}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+        }}
+        placeholder="Phone"
+        value={phone}
+        onChangeText={setPhone}
+      />
+      <TextInput
+        style={{
+          borderRadius: 20,
+          borderWidth: 2,
+          borderColor: 'blue',
+          marginTop: 20,
+          marginBottom: 20,
+        }}
         placeholder="Password"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Sign In" onPress={handleSignIn} />
-      <Text>OR</Text>
-      <Button title="Sign Up with Google" onPress={handleGoogleSignIn} />
-      <Button title="Sign Up with Facebook" onPress={handleFacebookSignIn} />
-      <Button title="Sign Up with Microsoft" onPress={handleMicrosoftSignIn} />
+      <View
+        style={{
+          marginHorizontal: 5,
+          borderRadius: 10,
+          overflow: 'hidden',
+          width: '50%',
+          alignSelf: 'center',
+        }}>
+        <Button title="Sign Up" onPress={handleSignIn} />
+      </View>
     </View>
   );
 };
 
-export default SignUpSignIn;
+export default Signup;

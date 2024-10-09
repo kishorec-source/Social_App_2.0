@@ -43,7 +43,7 @@ const Profile = ({user}) => {
           />
           <Button title="Save" onPress={handleSave} />
           <Image
-            source={{uri: 'https://via.placeholder.com/150'}}
+            source={require('../images/image1.jpg')}
             style={{width: 150, height: 150, marginTop: 10}}
           />
         </>
@@ -54,7 +54,7 @@ const Profile = ({user}) => {
           <Text>Profile Picture URL: {profilePic}</Text>
           <Button title="Edit" onPress={() => setIsEditing(true)} />
           <Image
-            source={{uri: 'https://via.placeholder.com/150'}}
+            source={require('../images/image1.jpg')}
             style={{width: 150, height: 150, marginTop: 10}}
           />
         </>

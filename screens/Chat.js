@@ -30,14 +30,15 @@ const Chat = () => {
   };
 
   return (
-    <View>
+    <View style={{marginTop: 50, alignSelf: 'center'}}>
       <FlatList data={messages} renderItem={({item}) => <Text>{item}</Text>} />
       <TextInput
+        style={{borderWidth: 1, width: 200, height: 40, fontSize: 16}}
         placeholder="Type a message"
         value={input}
         onChangeText={setInput}
       />
-      <Button title="Send" onPress={sendMessage} />
+      <Button title="Send" style={{fontSize: 16}} onPress={sendMessage} />
     </View>
   );
 };

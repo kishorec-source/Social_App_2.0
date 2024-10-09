@@ -1,4 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  FlatList,
+  TouchableOpacity,
+  Picker,
+} from 'react-native';
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
@@ -103,72 +112,74 @@ const Admin = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Panel</h1>
-      <h2>Users</h2>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            {user.name} ({user.email})
-            <button onClick={() => handleEditUser(user)}>Edit</button>
-            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
-            <button onClick={() => handleFlagUser(user.id)}>Flag</button>
-          </li>
-        ))}
-      </ul>
+    <View style={{margin: 20}}>
+      <Text>Admin Panel</Text>
+      <Text>Users</Text>
+      <FlatList
+        data={users}
+        keyExtractor={user => user.id.toString()}
+        renderItem={({item: user}) => (
+          <View>
+            <Text>
+              {user.name} ({user.email})
+            </Text>
+            <Button title="Edit" onPress={() => handleEditUser(user)} />
+            <Button title="Delete" onPress={() => handleDeleteUser(user.id)} />
+            <Button title="Flag" onPress={() => handleFlagUser(user.id)} />
+          </View>
+        )}
+      />
       {editingUser && (
-        <div>
-          <h2>Edit User</h2>
-          <input
-            type="text"
+        <View>
+          <Text>Edit User</Text>
+          <TextInput
             value={newUserData.name}
-            onChange={e =>
-              setNewUserData({...newUserData, name: e.target.value})
-            }
+            onChangeText={text => setNewUserData({...newUserData, name: text})}
           />
-          <input
-            type="email"
+          <TextInput
             value={newUserData.email}
-            onChange={e =>
-              setNewUserData({...newUserData, email: e.target.value})
-            }
+            onChangeText={text => setNewUserData({...newUserData, email: text})}
           />
-          <button onClick={handleSaveUser}>Save</button>
-        </div>
+          <Button title="Save" onPress={handleSaveUser} />
+        </View>
       )}
-      <h2>Posts</h2>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            {post.content} (Status: {post.status})
-            <button onClick={() => handleEditPost(post)}>Edit</button>
-            <button onClick={() => handleDeletePost(post.id)}>Delete</button>
-            <button onClick={() => handleFlagPost(post.id)}>Flag</button>
-          </li>
-        ))}
-      </ul>
+      <Text>Posts</Text>
+      <FlatList
+        data={posts}
+        keyExtractor={post => post.id.toString()}
+        renderItem={({item: post}) => (
+          <View>
+            <Text>
+              {post.content} (Status: {post.status})
+            </Text>
+            <Button title="Edit" onPress={() => handleEditPost(post)} />
+            <Button title="Delete" onPress={() => handleDeletePost(post.id)} />
+            <Button title="Flag" onPress={() => handleFlagPost(post.id)} />
+          </View>
+        )}
+      />
       {editingPost && (
-        <div>
-          <h2>Edit Post</h2>
-          <textarea
+        <View>
+          <Text>Edit Post</Text>
+          <TextInput
             value={newPostData.content}
-            onChange={e =>
-              setNewPostData({...newPostData, content: e.target.value})
+            onChangeText={text =>
+              setNewPostData({...newPostData, content: text})
             }
           />
-          <select
-            value={newPostData.status}
-            onChange={e =>
-              setNewPostData({...newPostData, status: e.target.value})
+          <Picker
+            selectedValue={newPostData.status}
+            onValueChange={itemValue =>
+              setNewPostData({...newPostData, status: itemValue})
             }>
-            <option value="approved">Approved</option>
-            <option value="pending">Pending</option>
-            <option value="rejected">Rejected</option>
-          </select>
-          <button onClick={handleSavePost}>Save</button>
-        </div>
+            <Picker.Item label="Approved" value="approved" />
+            <Picker.Item label="Pending" value="pending" />
+            <Picker.Item label="Rejected" value="rejected" />
+          </Picker>
+          <Button title="Save" onPress={handleSavePost} />
+        </View>
       )}
-    </div>
+    </View>
   );
 };
 
