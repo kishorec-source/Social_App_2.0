@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, Image, TouchableOpacity, Dimensions, TextInput } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
 
 const { width } = Dimensions.get('window');
 
@@ -45,15 +44,9 @@ export default function Index() {
 
       {/* Ad Card */}
       <View style={styles.card}>
-        <Video
-          source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }}
-          rate={1.0}
-          volume={1.0}
-          isMuted={false}
-          resizeMode={ResizeMode.COVER}
-          shouldPlay
-          isLooping
-          style={styles.video} />
+        <Image
+          source={{ uri: 'https://via.placeholder.com/150' }}
+          style={styles.image} />
         <View style={styles.iconContainer}>
           <TouchableOpacity style={styles.iconButton}>
             <Text style={styles.iconText}>👍</Text>
@@ -65,7 +58,8 @@ export default function Index() {
             <Text style={styles.iconText}>🔗</Text>
           </TouchableOpacity>
         </View>
-      </View><View style={styles.card}>
+      </View>
+      <View style={styles.card}>
         <Image
           source={{ uri: 'https://via.placeholder.com/150' }}
           style={styles.image} />
@@ -145,11 +139,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   image: {
-    width: '100%',
-    height: width * 0.4,
-    borderRadius: 10,
-  },
-  video: {
     width: '100%',
     height: width * 0.4,
     borderRadius: 10,
