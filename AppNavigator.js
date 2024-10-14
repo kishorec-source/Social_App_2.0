@@ -10,15 +10,15 @@ const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
+       <Stack.Screen
+          name="Signin"
+          component={Signin}
+          options={{headerShown: false}}
+        />
       <Stack.Navigator>
         <Stack.Screen
           name="BottomTabsNavigator"
           component={BottomTabsNavigator}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Signin"
-          component={Signin}
           options={{headerShown: false}}
         />
         <Stack.Screen

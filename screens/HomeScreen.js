@@ -60,7 +60,8 @@ const HomeScreen = () => {
             <Image
               source={
                 selectedTab == 0
-                  ? require('../images/home_fill.png')
+                   ? require('../images/delete.png')
+
                   : require('../images/home.png')
               }
               style={styles.bottomTabIcon}
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bottomTabIcon: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
   },
 });
