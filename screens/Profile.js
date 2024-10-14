@@ -19,44 +19,41 @@ const Profile = ({user}) => {
   };
 
   return (
-    <View>
-      <Image source={{uri: profilePic}} style={{width: 100, height: 100}} />
+    <View style={{margin: 20}}>
+      <Image
+        source={require('../images/image1.jpg')}
+        style={{width: 200, height: 200, borderRadius: 50, marginVertical: 20}}
+      />
       {isEditing ? (
         <>
           <TextInput
             placeholder="Name"
             value={name}
             onChangeText={setName}
-            style={{borderWidth: 1, marginBottom: 10}}
+            style={{borderWidth: 1, marginBottom: 10, marginVertical: 20}}
           />
           <TextInput
             placeholder="Bio"
             value={bio}
             onChangeText={setBio}
-            style={{borderWidth: 1, marginBottom: 10}}
+            style={{borderWidth: 1, marginVertical: 20}}
           />
           <TextInput
             placeholder="Profile Picture URL"
             value={profilePic}
             onChangeText={setProfilePic}
-            style={{borderWidth: 1, marginBottom: 10}}
+            style={{borderWidth: 1, marginVertical: 20}}
           />
           <Button title="Save" onPress={handleSave} />
-          <Image
-            source={require('../images/image1.jpg')}
-            style={{width: 150, height: 150, marginTop: 10}}
-          />
         </>
       ) : (
         <>
-          <Text>Name: {name}</Text>
-          <Text>Bio: {bio}</Text>
-          <Text>Profile Picture URL: {profilePic}</Text>
+          <Text style={{marginVertical: 20}}>Name: {name}</Text>
+          <Text style={{marginVertical: 20}}>Bio: {bio}</Text>
+          <Text style={{marginVertical: 20}}>
+            Profile Picture URL: {profilePic}
+          </Text>
           <Button title="Edit" onPress={() => setIsEditing(true)} />
-          <Image
-            source={require('../images/image1.jpg')}
-            style={{width: 150, height: 150, marginTop: 10}}
-          />
         </>
       )}
     </View>

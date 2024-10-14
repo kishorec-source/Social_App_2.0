@@ -3,11 +3,15 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
+  ScrollView,
 } from 'react-native';
+import Profile from './Profile';
+import Buddy from './Buddy';
+import Gallery from '../components/Gallery';
 
 const Reunion = () => {
   const [date, setDate] = useState('');
@@ -21,36 +25,9 @@ const Reunion = () => {
       description: 'Christmas Reunion',
       attendees: [],
     },
-    {
-      id: '2',
-      date: '2024-01-01',
-      location: 'Los Angeles',
-      description: 'New Year Reunion',
-      attendees: [],
-    },
-    {
-      id: '3',
-      date: '2024-02-14',
-      location: 'Chicago',
-      description: "Valentine's Day Reunion",
-      attendees: [],
-    },
-    {
-      id: '4',
-      date: '2024-03-17',
-      location: 'Boston',
-      description: "St. Patrick's Day Reunion",
-      attendees: [],
-    },
-    {
-      id: '5',
-      date: '2024-07-04',
-      location: 'Washington D.C.',
-      description: 'Independence Day Reunion',
-      attendees: [],
-    },
   ]);
   const [attendeeName, setAttendeeName] = useState('');
+  const [selectedTab, setSelectedTab] = useState('UserDetail');
 
   const handleCreateEvent = () => {
     const newEvent = {
@@ -78,62 +55,109 @@ const Reunion = () => {
     setAttendeeName('');
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Date:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter date"
-        value={date}
-        onChangeText={setDate}
-      />
-      <Text style={styles.label}>Location:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter location"
-        value={location}
-        onChangeText={setLocation}
-      />
-      <Text style={styles.label}>Description:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter description"
-        value={description}
-        onChangeText={setDescription}
-      />
-      <Button title="Create Event" onPress={handleCreateEvent} />
-      <FlatList
-        data={events}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <View style={styles.eventItem}>
-            <Text style={styles.eventText}>Date: {item.date}</Text>
-            <Text style={styles.eventText}>Location: {item.location}</Text>
-            <Text style={styles.eventText}>
-              Description: {item.description}
-            </Text>
-            <Text style={styles.label}>Attendees:</Text>
-            <FlatList
-              data={item.attendees}
-              keyExtractor={(attendee, index) => index.toString()}
-              renderItem={({item}) => (
-                <Text style={styles.attendeeText}>{item}</Text>
-              )}
-            />
+  const renderTabContent = () => {
+    switch (selectedTab) {
+      case 'UserDetail':
+        return <Profile />;
+      case 'Events':
+        return (
+          <View>
+            <Text style={styles.label}>Date:</Text>
             <TextInput
               style={styles.input}
-              placeholder="Enter your name"
-              value={attendeeName}
-              onChangeText={setAttendeeName}
+              placeholder="Enter date"
+              value={date}
+              onChangeText={setDate}
+            />
+            <Text style={styles.label}>Location:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter location"
+              value={location}
+              onChangeText={setLocation}
+            />
+            <Text style={styles.label}>Description:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter description"
+              value={description}
+              onChangeText={setDescription}
             />
             <TouchableOpacity
-              style={styles.rsvpButton}
-              onPress={() => handleRSVP(item.id)}>
-              <Text style={styles.rsvpButtonText}>RSVP</Text>
+              style={styles.createButton}
+              onPress={handleCreateEvent}>
+              <Text style={styles.createButtonText}>Create Event</Text>
             </TouchableOpacity>
+            <FlatList
+              data={events}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => (
+                <View style={styles.eventItem}>
+                  <Text style={styles.eventText}>Date: {item.date}</Text>
+                  <Text style={styles.eventText}>
+                    Location: {item.location}
+                  </Text>
+                  <Text style={styles.eventText}>
+                    Description: {item.description}
+                  </Text>
+                  <Text style={styles.label}>Attendees:</Text>
+                  <FlatList
+                    data={item.attendees}
+                    keyExtractor={(attendee, index) => index.toString()}
+                    renderItem={({item}) => (
+                      <Text style={styles.attendeeText}>{item}</Text>
+                    )}
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your name"
+                    value={attendeeName}
+                    onChangeText={setAttendeeName}
+                  />
+                  <TouchableOpacity
+                    style={styles.rsvpButton}
+                    onPress={() => handleRSVP(item.id)}>
+                    <Text style={styles.rsvpButtonText}>RSVP</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            />
           </View>
-        )}
-      />
+        );
+      case 'BuddyLists':
+        return <Buddy />;
+      case 'Gallery':
+        return <Gallery />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.tabContainer}>
+        <TouchableOpacity
+          style={selectedTab === 'UserDetail' ? styles.activeTab : styles.tab}
+          onPress={() => setSelectedTab('UserDetail')}>
+          <Text style={styles.tabText}>User Detail</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={selectedTab === 'Events' ? styles.activeTab : styles.tab}
+          onPress={() => setSelectedTab('Events')}>
+          <Text style={styles.tabText}>Events</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={selectedTab === 'BuddyLists' ? styles.activeTab : styles.tab}
+          onPress={() => setSelectedTab('BuddyLists')}>
+          <Text style={styles.tabText}>Buddy Lists</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={selectedTab === 'Gallery' ? styles.activeTab : styles.tab}
+          onPress={() => setSelectedTab('Gallery')}>
+          <Text style={styles.tabText}>Gallery</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={styles.tabContent}>{renderTabContent()}</ScrollView>
     </View>
   );
 };
@@ -143,8 +167,53 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  tab: {
+    padding: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  activeTab: {
+    padding: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: '#007BFF',
+  },
+  tabText: {
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  tabContent: {
+    flex: 1,
+  },
+  userDetail: {
+    alignItems: 'center',
+  },
+  userImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  userName: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  userEmail: {
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  userRSVP: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: 'green',
+  },
   label: {
     fontSize: 18,
+    fontWeight: '400',
     marginVertical: 10,
   },
   input: {
@@ -152,7 +221,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     padding: 10,
     fontSize: 18,
-    borderRadius: 5,
+    fontWeight: '400',
+    borderRadius: 20,
   },
   eventItem: {
     padding: 10,
@@ -162,21 +232,40 @@ const styles = StyleSheet.create({
   },
   eventText: {
     fontSize: 16,
+    fontWeight: '400',
   },
   attendeeText: {
     fontSize: 14,
+    fontWeight: '400',
     marginLeft: 10,
+  },
+  createButton: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 10,
+    width: '50%',
+    alignSelf: 'center',
+  },
+  createButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '400',
   },
   rsvpButton: {
     backgroundColor: '#007BFF',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     marginTop: 10,
+    width: '50%',
+    alignSelf: 'center',
   },
   rsvpButtonText: {
     color: '#fff',
     textAlign: 'center',
     fontSize: 16,
+    fontWeight: '400',
   },
 });
 
